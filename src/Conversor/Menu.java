@@ -1,17 +1,11 @@
 package Conversor;
 
 import java.awt.EventQueue;
-import java.awt.HeadlessException;
-
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
-import javax.swing.DefaultComboBoxModel;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+
 
 public class Menu extends JFrame {
 
@@ -38,6 +32,7 @@ public class Menu extends JFrame {
 	 */
 	
 	public Menu() {
+		
 		setTitle("MENU");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 340, 230);
@@ -59,26 +54,14 @@ public class Menu extends JFrame {
 		contenido.setLayout(null);
 		
 		TipoConversor tipoConv = new TipoConversor();
-		tipoConv.setBounds(0, 0, 320, 174);
-		tipoConv.setSize(320, 174);
-		tipoConv.setLocation(0, 0);
-		contenido.removeAll();
-		contenido.setLayout(null);
-		contenido.add(tipoConv);
-		contenido.revalidate();
-		contenido.repaint();
+		tipoConv.mostrarPanelTipo(contenido);
+
 		
 
 }//Fin Menu()
 	
-//Constructor..se necesita?
-	public Menu(JPanel contentPane) throws HeadlessException {
-		super();
-		this.contentPane = contentPane;
-	}
 
-	
-	}
+}
 	
 	
 

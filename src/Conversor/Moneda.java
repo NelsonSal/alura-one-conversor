@@ -3,11 +3,15 @@ package Conversor;
 public class Moneda {
 	private String nombreMoneda;
 	private double valor;
+	private String simbolo;
 
-	public Moneda(String nombreMoneda, double valor) {
+	
+
+	public Moneda(String nombreMoneda, double valor, String simbolo) {
 		super();
 		this.nombreMoneda = nombreMoneda;
 		this.valor = valor;
+		this.simbolo = simbolo;
 	}
 
 	public String getNombreMoneda() {
@@ -25,5 +29,15 @@ public class Moneda {
 	public void setValor(double valor) {
 		this.valor = valor;
 	}
+
+	public String getSimbolo() {
+		return simbolo;
+	}
+
+	public void setSimbolo(String simbolo) {
+		this.simbolo = simbolo;
+	}
+	
+	
 
 }

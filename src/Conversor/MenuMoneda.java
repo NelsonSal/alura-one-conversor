@@ -32,87 +32,73 @@ public class MenuMoneda extends JPanel {
 		this.cantidadDinero = cantidadDinero;
 	}
 
+	
+	
 	/**
 	 * Create the panel.
 	 */
 	public MenuMoneda() {
 		setLayout(null);
-		
+		//Modelo y datos conversor
 		Moneda ArrayMonedas[] = new Moneda[5];
-		ArrayMonedas[0] = new Moneda("Dolares US$", 5000);
-		ArrayMonedas[1] = new Moneda("Euros €", 6000);
-		ArrayMonedas[2] = new Moneda("UK libras ", 8000);
-		ArrayMonedas[3] = new Moneda("Yen Japones ¥", 6000);
-		ArrayMonedas[4] = new Moneda("Won Surcoreano ₩", 6000);
+		ArrayMonedas[0] = new Moneda("Dolares", 4787.09, "US$");
+		ArrayMonedas[1] = new Moneda("Euros", 5088.57,"€" );
+		ArrayMonedas[2] = new Moneda("UK libras", 5764.13 ,"£");
+		ArrayMonedas[3] = new Moneda("Yen Japones", 35.21,"¥");
+		ArrayMonedas[4] = new Moneda("Won Surcoreano", 3.69,"₩");
 		
 		JPanel panelMoneda = new JPanel();
 		panelMoneda.setBounds(0, 0, 320, 174);
 		add(panelMoneda);
 		panelMoneda.setLayout(null);
-		
+		//Traemos el valor a convertir de la clase TipoConversor
 		TipoConversor traer = new TipoConversor();
-		cantidadDinero=traer.getCantMoneda();
-		JOptionPane.showMessageDialog(null, "Valor traido" + cantidadDinero);
+		cantidadDinero=traer.getcantidadIn();
 		BigDecimal cantMonedaBig = new BigDecimal(cantidadDinero);
 		
-		JButton btnNewButton = new JButton("Cancel Moneda");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnCancellMoneda = new JButton("Cancelar");
+		btnCancellMoneda.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//panel.setVisible(false);
 				TipoConversor tipoConv = new TipoConversor();
-				tipoConv.setBounds(0, 0, 320, 174);
-				tipoConv.setSize(320, 174);
-				tipoConv.setLocation(0, 0);
-				panelMoneda.removeAll();
-				panelMoneda.setLayout(null);
-				panelMoneda.add(tipoConv);
-				panelMoneda.revalidate();
-				panelMoneda.repaint();
-				
+				tipoConv.mostrarPanelTipo(panelMoneda);
 				
 				
 			}
 		});
-		btnNewButton.setBounds(169, 91, 89, 23);
-		panelMoneda.add(btnNewButton);
+		btnCancellMoneda.setBounds(188, 95, 89, 23);
+		panelMoneda.add(btnCancellMoneda);
 		
 		JComboBox comboBoxMoneda = new JComboBox();
 		comboBoxMoneda.setModel(new DefaultComboBoxModel(new String[] {"De Pesos a Dolares USA", "De Pesos a Euros", "De Pesos a Libras Esterlinas", "De Pesos a Yen Japones", "De Pesos a Won Surcoreano", "De Dolares USA a Pesos", "De Euros a Pesos", "De Libras Esterlinas a Pesos", "De Yen Japones a Pesos", "De Won Surcoreano a Pesos"}));
 		comboBoxMoneda.setBounds(67, 37, 190, 22);
 		panelMoneda.add(comboBoxMoneda);
 		
-		JButton btnNewButton_1 = new JButton("OK money");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		JButton btnOKmoney = new JButton("OK");
+		btnOKmoney.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//conversion
 				int tipoCambio = comboBoxMoneda.getSelectedIndex();// retorna index seleccionado al dar OK
 				
 				//Manejo de decimales y error: 5,RoundingMode.HALF_UP
-				JOptionPane.showMessageDialog(null, "Tipo cambio: "+tipoCambio+ " cantidad= "+cantMonedaBig);
 				if (tipoCambio <= 4) {
 					BigDecimal divisor = new BigDecimal(ArrayMonedas[tipoCambio].getValor());
 					BigDecimal conversion= (cantMonedaBig.divide(divisor,5,RoundingMode.HALF_UP));
-					JOptionPane.showMessageDialog(null, "El valor de " + cantMonedaBig + " pesos es de: "
-							+ conversion + "  " + (ArrayMonedas[tipoCambio].getNombreMoneda()));
+					JOptionPane.showMessageDialog(null, "El valor de COP$ " + cantMonedaBig + " pesos es de: "+ArrayMonedas[tipoCambio].getSimbolo()+" "
+							+ conversion + " " + (ArrayMonedas[tipoCambio].getNombreMoneda()));
 				} else {
 					tipoCambio = tipoCambio - 5;
 					BigDecimal divisor = new BigDecimal(ArrayMonedas[tipoCambio].getValor());
-					
+					BigDecimal conversion= (cantMonedaBig.multiply(divisor).setScale(3, RoundingMode.HALF_UP));
 					JOptionPane.showMessageDialog(null,
-							"El valor de " + cantMonedaBig + " " + (ArrayMonedas[tipoCambio].getNombreMoneda())
-									+ " es de: $" + (divisor.multiply(cantMonedaBig) + " pesos  "));
+							"El valor de "+ArrayMonedas[tipoCambio].getSimbolo()+" " + cantMonedaBig + " " + (ArrayMonedas[tipoCambio].getNombreMoneda())
+									+ " es de: COP$ " +conversion + " pesos  ");
 				}
-				int continuar= JOptionPane.showConfirmDialog(btnNewButton_1,"¿Desea continuar?", "CONtiNUAR", JOptionPane.YES_NO_CANCEL_OPTION);
+				int continuar= JOptionPane.showConfirmDialog(btnOKmoney,"¿Desea continuar?", "CONtiNUAR", JOptionPane.YES_NO_CANCEL_OPTION);
 				if (continuar==JOptionPane.YES_OPTION) {
+					
 					TipoConversor tipoConv = new TipoConversor();
-					tipoConv.setBounds(0, 0, 320, 174);
-					tipoConv.setSize(320, 174);
-					tipoConv.setLocation(0, 0);
-					panelMoneda.removeAll();
-					panelMoneda.setLayout(null);
-					panelMoneda.add(tipoConv);
-					panelMoneda.revalidate();
-					panelMoneda.repaint();
+					tipoConv.mostrarPanelTipo(panelMoneda);
+					
 				}else if(continuar==JOptionPane.NO_OPTION) {
 					JOptionPane.showMessageDialog(null,"Programa Terminado");
 					System.exit(0);
@@ -121,12 +107,14 @@ public class MenuMoneda extends JPanel {
 				
 			}
 		});
-		btnNewButton_1.setBounds(40, 91, 89, 23);
-		panelMoneda.add(btnNewButton_1);
+		btnOKmoney.setBounds(43, 95, 89, 23);
+		panelMoneda.add(btnOKmoney);
 		
 		JLabel lblNewLabel = new JLabel("Elija la converción deseada");
-		lblNewLabel.setBounds(67, 11, 160, 14);
+		lblNewLabel.setBounds(53, 12, 160, 14);
 		panelMoneda.add(lblNewLabel);
+		
+		
 
 	}
 }
