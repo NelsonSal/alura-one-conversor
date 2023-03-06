@@ -93,7 +93,7 @@ public class MenuMoneda extends JPanel {
 							"El valor de "+ArrayMonedas[tipoCambio].getSimbolo()+" " + cantMonedaBig + " " + (ArrayMonedas[tipoCambio].getNombreMoneda())
 									+ " es de: COP$ " +conversion + " pesos  ");
 				}
-				int continuar= JOptionPane.showConfirmDialog(btnOKmoney,"¿Desea continuar?", "CONtiNUAR", JOptionPane.YES_NO_CANCEL_OPTION);
+				int continuar= JOptionPane.showConfirmDialog(btnOKmoney,"¿Desea continuar?", "CONTINUAR", JOptionPane.YES_NO_CANCEL_OPTION);
 				if (continuar==JOptionPane.YES_OPTION) {
 					
 					TipoConversor tipoConv = new TipoConversor();
@@ -110,7 +110,7 @@ public class MenuMoneda extends JPanel {
 		btnOKmoney.setBounds(43, 95, 89, 23);
 		panelMoneda.add(btnOKmoney);
 		
-		JLabel lblNewLabel = new JLabel("Elija la converción deseada");
+		JLabel lblNewLabel = new JLabel("Elija la Conversión deseada");
 		lblNewLabel.setBounds(53, 12, 160, 14);
 		panelMoneda.add(lblNewLabel);
 		

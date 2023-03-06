@@ -86,7 +86,7 @@ public class MenuDistancia extends JPanel {
 		btnCancelDist.setBounds(188, 95, 89, 23);
 		panelDistancia.add(btnCancelDist);
 		
-		JLabel lblNewLabel = new JLabel("Elija la converción deseada");
+		JLabel lblNewLabel = new JLabel("Elija la Conversión deseada");
 		lblNewLabel.setBounds(53, 12, 214, 14);
 		panelDistancia.add(lblNewLabel);
 
